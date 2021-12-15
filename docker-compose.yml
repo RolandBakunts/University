@@ -1,0 +1,35 @@
+version: '2.4'
+services:
+  db-mongo:
+    image: mongo:4.2
+    container_name: db-mongo
+    env_file:
+      - .env
+    ports:
+      - 27017:27017 
+    volumes:
+      - './data:/data/db'
+    networks:
+      - app-net
+
+  node:
+    container_name: node
+    ports:
+      - 3456:3456
+    build:
+      context: .
+    depends_on:
+      - db-mongo
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=dev
+    volumes:
+      - .:/usr/src/api:delegated
+    networks:
+      - app-net
+
+  
+networks:
+  app-net:
+    driver: bridge
