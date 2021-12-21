@@ -1,9 +1,14 @@
+
 const User = require('../models/user');
-const { NotFound, Unauthorized, Forbidden } = require('../errorHandler/httpError');
+const CourseRegistration = require('../models/courseRegistration');
+const Course = require('../models/course');
+
+const { Unauthorized, Forbidden, NotFound } = require('../errorHandler/httpError');
 const { sendEmailConfirmation } = require('./MailingService');
 const config = require('../config');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const req = require('express/lib/request');
 
 const { jwtSecret } = config;
 
@@ -39,9 +44,34 @@ async function login(data) {
     const token = jwt.sign({ id }, jwtSecret, { expiresIn: '3h' });
     return token;
 }
+async function deleteRegistration(role, data) {
+    if (role === 'teacher') {
+        return deleteRegistrationTeacher(data);
+    }
+    if (role === 'student') {
+        return deleteRegistrationStudent(data);
+    }
+    throw Unauthorized('user cannot delete')
+}
+async function deleteRegistrationTeacher(data) {
+
+    const { userId, studentId, courseId } = data;
+    const course = await Course.findOne({ _id: courseId });
+    if (course.teacher !== userId) {
+        throw Forbidden('not course')
+    }
+    await CourseRegistration.findOneAndDelete({ studentId, courseId });
+    return;
+}
+async function deleteRegistrationStudent(data) {
+    const { studentId, courseId } = data;
+    await CourseRegistration.findOneAndDelete({ studentId, courseId });
+    return;
+}
 
 module.exports = {
     signup,
     login,
-    email_confirmation
+    email_confirmation,
+    deleteRegistration
 }
