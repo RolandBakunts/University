@@ -20,7 +20,6 @@ router.put('/studentRegisteration', [verify, isStudent], studentRegisteration);
 router.post('/updateGrade/:id', [verify, isTeacher], updateGrade);
 router.delete('/deleteRegistration', [verify], deleteRegistration);
 
-// router.get('/email-confirmation/:token', email_confirmation)
 
 const { jwtSecret } = config;
 

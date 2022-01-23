@@ -15,10 +15,16 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   },
   "scripts": {
+    "test": "jest",
     "start": "nodemon app.js"
+  },
+  "jest":{
+    "testEnvironment":"node"
   },
   "author": "",
   "license": "ISC"

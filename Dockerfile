@@ -1,15 +1,8 @@
-FROM node:12
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
+FROM node:12-alpine
 EXPOSE 3456
-
-RUN npm install nodemon -g
-
-CMD PORT=3456 nodemon app.js
+WORKDIR /
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm install nodemon -g && npm install
+CMD PORT=3456 nodemon -L -e js,ts,ejs,json app.js

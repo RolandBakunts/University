@@ -1,17 +1,26 @@
-const { NotFound } = require('../errorHandler/httpError');
+const { NotFound, Forbidden } = require('../errorHandler/httpError');
 const Product = require('../models/product');
 
 async function getProduct(data) {
+    if(!data){
+        throw new Forbidden('no data provided')
+    }
     const product = await Product.findOne(data);
     return product;
 }
  
 async function createProduct(data) {
+    if(!data){
+        throw new Forbidden('no data provided')
+    }
     const product = await Product.create(data);
     return product;
 }
 
 async function deleteProduct(data) {
+    if(!data){
+        throw new Forbidden('no data provided')
+    }
     const product = await Product.deleteOne(data);
     return product;
 }

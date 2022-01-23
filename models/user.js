@@ -21,18 +21,18 @@ const UserSchema = new mongoose.Schema({
       type: String,
       required: false
     },
-    random: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    emailConfirmed:{
-      type:Boolean,
-      required:true
-    },
-    emailConfirmationToken:{
-      tyoe:String
-    },
+    // random: {
+    //   type: Number,
+    //   required: false,
+    //   default: 0
+    // },
+    // emailConfirmed:{
+    //   type:Boolean,
+    //   required:true
+    // },
+    // emailConfirmationToken:{
+    //   tyoe:String
+    // },
     role:{
       type:String
     }

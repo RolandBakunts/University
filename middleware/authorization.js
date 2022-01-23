@@ -20,7 +20,7 @@ async function verify(req, res, next) {
         const user = await User.findOne({ _id: id });
         req.user = user;
         next();
-    }
+    } 
     catch (error) {
          next(error, req, res, next);
     }
