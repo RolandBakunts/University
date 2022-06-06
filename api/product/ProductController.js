@@ -22,7 +22,7 @@ async function getProduct(req, res, next) {
         throw new NotFound();
     } catch (error) {
         next(error, req, res, next);
-    }
+    } 
 }
 
 async function createProduct(req, res, next) {

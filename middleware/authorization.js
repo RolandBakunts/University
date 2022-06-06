@@ -25,5 +25,5 @@ async function verify(req, res, next) {
          next(error, req, res, next);
     }
 }
-//stugel 
+
 module.exports = verify
