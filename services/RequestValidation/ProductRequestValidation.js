@@ -3,7 +3,7 @@ const { BadRequest } = require('../../errorHandler/httpError');
 
 function getProduct(input) {
     const schema = Joi.object({
-        id: Joi.string() 
+        id: Joi.string()
             .required(),
     })
     if (!schema.validate(input)) {
@@ -13,7 +13,7 @@ function getProduct(input) {
 }
 function deleteProduct(input) {
     const schema = Joi.object({
-        id: Joi.string() 
+        id: Joi.string()
             .required(),
     })
     if (!schema.validate(input)) {
@@ -21,38 +21,38 @@ function deleteProduct(input) {
     };
     return;
 }
-function uptadeProduct(params,body){
+function uptadeProduct(params, body) {
     const schema = Joi.object({
-        id: Joi.string() 
+        id: Joi.string()
             .required(),
     })
     if (!schema.validate(params)) {
         throw new BadRequest(result.error);
     };
     const schema2 = Joi.object({
-            name: Joi.string()
+        name: Joi.string()
             .alphanum()
             .min(3)
             .max(30),
-            price: Joi.number()     
+        price: Joi.number()
     })
-    if(!schema2.validate(body)){
+    if (!schema2.validate(body)) {
         throw new BadRequest(result.error);
     };
     return;
 }
 
-function createProduct(input){
+function createProduct(input) {
     const schema = Joi.object({
-            name: Joi.string()
+        name: Joi.string()
             .alphanum()
             .min(3)
             .max(30)
             .required(),
-            price: Joi.number()   
+        price: Joi.number()
             .required(),
     })
-    if(!schema.validate(input)){
+    if (!schema.validate(input)) {
         throw new BadRequest(result.error);
     };
     return;

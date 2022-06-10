@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { NotFound, MethodNotAllowed, InternalServerError } = require('../../errorHandler/httpError');
+const { NotFound, MethodNotAllowed } = require('../../errorHandler/httpError');
 const verify = require("../../middleware/authorization");
 const ProductService = require('../../services/ProductService');
 const { getProduct: getProductValidation, createProduct: createProductValidation, uptadeProduct: uptadeProductValidation, deleteProduct: deleteProductValidation } = require('../../services/RequestValidation/UserRequestValidation');
@@ -22,7 +22,7 @@ async function getProduct(req, res, next) {
         throw new NotFound();
     } catch (error) {
         next(error, req, res, next);
-    }
+    } 
 }
 
 async function createProduct(req, res, next) {

@@ -3,7 +3,7 @@ const { BadRequest } = require('../../errorHandler/httpError');
 
 function email_confirmation(params) {
     const schema = Joi.object({
-        token: Joi.string() 
+        token: Joi.string()
             .required(),
     })
     if (!schema.validate(params)) {
@@ -50,9 +50,46 @@ function signup(input) {
     };
     return;
 }
+function updateGrade(input) {
+    const schema = Joi.object({
+        grade: Joi.number()
+            .required(),
+        courseId: Joi.string()
+            .required(),
+        studentId: Joi.string()
+            .required(),
+    })
+    if (!schema.validate(input)) {
+        throw new BadRequest(result.error);
+    };
+    return;
+}
+function studentRegisteration(input) {
+    const schema = Joi.object({
+        courseId: Joi.string()
+            .required(),
+    })
+    if (!schema.validate(input)) {
+        throw new BadRequest(result.error);
+    };
+    return;
+}
 
+function deleteRegistration(input) {
+    const schema = Joi.object({
+        courseId: Joi.string()
+            .required(),
+    })
+    if (!schema.validate(input)) {
+        throw new BadRequest(result.error);
+    };
+    return;
+}
 module.exports = {
     email_confirmation,
     login,
-    signup
+    signup,
+    updateGrade,
+    studentRegisteration,
+    deleteRegistration
 }
